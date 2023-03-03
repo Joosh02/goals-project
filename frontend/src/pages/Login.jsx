@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { FaSignInAlt } from "react-icons/fa";
+import { GoSignIn } from "react-icons/go";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -27,10 +27,10 @@ function Login() {
     }
 
     if (isSuccess || user) {
-      navigate("/");
+      navigate("/dashboard");
     }
 
-    dispatch(reset);
+    dispatch(reset());
   }, [user, isError, isSuccess, message, navigate, dispatch]);
 
   const onChange = (e) => {
@@ -59,7 +59,7 @@ function Login() {
     <>
       <section className="heading">
         <h1>
-          <FaSignInAlt /> Login
+          <GoSignIn /> Login
         </h1>
         <p>Login and start setting goals</p>
       </section>

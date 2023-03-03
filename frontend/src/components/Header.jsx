@@ -1,4 +1,5 @@
-import { FaSignInAlt, FaSignOutAlt, FaUser } from "react-icons/fa";
+import { FaUserAstronaut } from "react-icons/fa";
+import { GoSignOut, GoSignIn } from "react-icons/go";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { logout, reset } from "../features/auth/authSlice";
@@ -9,9 +10,18 @@ function Header() {
   const { user } = useSelector((state) => state.auth);
 
   const onLogout = () => {
-    dispatch(logout());
-    dispatch(reset());
-    navigate("/");
+    const confirmed = window.confirm("Are you sure you want to logout?");
+    if (confirmed) {
+      // clear the token from local storage
+      localStorage.removeItem("token");
+
+      // dispatch the logout and reset actions
+      dispatch(logout());
+      dispatch(reset());
+
+      // navigate to the login page
+      navigate("/");
+    }
   };
 
   return (
@@ -23,21 +33,21 @@ function Header() {
         {user ? (
           <li>
             <button className="btn" onClick={onLogout}>
-              <FaSignOutAlt />
+              <GoSignOut />
               Logout
             </button>
           </li>
         ) : (
           <>
             <li>
-              <Link to="/login">
-                <FaSignInAlt />
+              <Link to="/">
+                <GoSignIn />
                 Login
               </Link>
             </li>
             <li>
               <Link to="/register">
-                <FaUser />
+                <FaUserAstronaut />
                 Register
               </Link>
             </li>
