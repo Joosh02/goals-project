@@ -27,7 +27,8 @@ function Header() {
   return (
     <header className="header">
       <div className="logo">
-        <Link to="/">GoalSetter</Link>
+        <img src="./assets/logo.png" alt="logo" />
+        <Link to="/">ClearTask</Link>
       </div>
       <ul>
         {user ? (
